@@ -1,10 +1,10 @@
-# Create the index.html content for the Year 7 IB Math Algebra Quiz web app
+# Create the HTML content for the quiz web app
 html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Year 7 IB Math Algebra Quiz</title>
+  <title>Year 7 IB Math Linear Algebra Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,73 +32,97 @@ html_content = """
 </head>
 <body>
   <div class="container">
-    <h1>Year 7 IB Math Algebra Quiz</h1>
+    <h1>Year 7 IB Math Linear Algebra Quiz</h1>
     <div id="quiz">
-      <p id="question">Question will appear here</p>
-      <input type="text" id="answer" placeholder="Your answer">
-      <button onclick="checkAnswer()">Submit</button>
-      <p class="feedback" id="feedback"></p>
-      <button onclick="nextQuestion()">Next Question</button>
+      <div class="question">
+        <p>1. Solve for x: 2x + 3 = 7</p>
+        <input type="number" id="q1" placeholder="Your answer">
+        <button onclick="checkAnswer(1, 2)">Submit</button>
+        <p class="feedback" id="feedback1"></p>
+      </div>
+      <div class="question">
+        <p>2. Solve for y: 3y - 4 = 11</p>
+        <input type="number" id="q2" placeholder="Your answer">
+        <button onclick="checkAnswer(2, 5)">Submit</button>
+        <p class="feedback" id="feedback2"></p>
+      </div>
+      <div class="question">
+        <p>3. Solve for x: 4x + 5 = 21</p>
+        <input type="number" id="q3" placeholder="Your answer">
+        <button onclick="checkAnswer(3, 4)">Submit</button>
+        <p class="feedback" id="feedback3"></p>
+      </div>
+      <div class="question">
+        <p>4. Solve for y: 5y - 6 = 19</p>
+        <input type="number" id="q4" placeholder="Your answer">
+        <button onclick="checkAnswer(4, 5)">Submit</button>
+        <p class="feedback" id="feedback4"></p>
+      </div>
+      <div class="question">
+        <p>5. Solve for x: 6x + 7 = 25</p>
+        <input type="number" id="q5" placeholder="Your answer">
+        <button onclick="checkAnswer(5, 3)">Submit</button>
+        <p class="feedback" id="feedback5"></p>
+      </div>
+      <div class="question">
+        <p>6. Solve for y: 7y - 8 = 34</p>
+        <input type="number" id="q6" placeholder="Your answer">
+        <button onclick="checkAnswer(6, 6)">Submit</button>
+        <p class="feedback" id="feedback6"></p>
+      </div>
+      <div class="question">
+        <p>7. Solve for x: 8x + 9 = 41</p>
+        <input type="number" id="q7" placeholder="Your answer">
+        <button onclick="checkAnswer(7, 4)">Submit</button>
+        <p class="feedback" id="feedback7"></p>
+      </div>
+      <div class="question">
+        <p>8. Solve for y: 9y - 10 = 62</p>
+        <input type="number" id="q8" placeholder="Your answer">
+        <button onclick="checkAnswer(8, 8)">Submit</button>
+        <p class="feedback" id="feedback8"></p>
+      </div>
+      <div class="question">
+        <p>9. Solve for x: 10x + 11 = 51</p>
+        <input type="number" id="q9" placeholder="Your answer">
+        <button onclick="checkAnswer(9, 4)">Submit</button>
+        <p class="feedback" id="feedback9"></p>
+      </div>
+      <div class="question">
+        <p>10. Solve for y: 11y - 12 = 89</p>
+        <input type="number" id="q10" placeholder="Your answer">
+        <button onclick="checkAnswer(10, 11)">Submit</button>
+        <p class="feedback" id="feedback10"></p>
+      </div>
     </div>
   </div>
 
   <script>
-    const questions = [
-      { question: "Simplify: 3x + 5x", answer: "8x" },
-      { question: "Solve: 2x = 10", answer: "5" },
-      { question: "Expand: (x + 3)(x + 2)", answer: "x^2 + 5x + 6" },
-      { question: "Factorize: x^2 - 9", answer: "(x + 3)(x - 3)" },
-      { question: "Simplify: 4y - 2y + y", answer: "3y" },
-      { question: "Solve: x/3 = 4", answer: "12" },
-      { question: "Expand: 3(x + 4)", answer: "3x + 12" },
-      { question: "Factorize: x^2 + 6x + 9", answer: "(x + 3)^2" },
-      { question: "Simplify: 5a + 2a - 3a", answer: "4a" },
-      { question: "Solve: 3x - 1 = 8", answer: "3" }
-    ];
-
-    let currentQuestionIndex = 0;
-
-    function displayQuestion() {
-      const questionElement = document.getElementById('question');
-      questionElement.textContent = questions[currentQuestionIndex].question;
-      document.getElementById('answer').value = '';
-      document.getElementById('feedback').textContent = '';
-    }
-
-    function checkAnswer() {
-      const userAnswer = document.getElementById('answer').value.trim();
-      const correctAnswer = questions[currentQuestionIndex].answer;
-      const feedbackElement = document.getElementById('feedback');
+    function checkAnswer(questionNumber, correctAnswer) {
+      const userAnswer = parseInt(document.getElementById('q' + questionNumber).value);
+      const feedback = document.getElementById('feedback' + questionNumber);
       if (userAnswer === correctAnswer) {
-        feedbackElement.textContent = '✅ Correct!';
-        feedbackElement.style.color = 'green';
+        feedback.textContent = '✅ Correct!';
+        feedback.style.color = 'green';
       } else {
-        feedbackElement.textContent = `❌ Incorrect! The correct answer is ${correctAnswer}.`;
-        feedbackElement.style.color = 'red';
+        feedback.textContent = `❌ Oops! The correct answer was ${correctAnswer}.`;
+        feedback.style.color = 'red';
       }
     }
-
-    function nextQuestion() {
-      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
-      displayQuestion();
-    }
-
-    // Display the first question on load
-    displayQuestion();
   </script>
 </body>
 </html>
 """
 
-# Write the HTML content to index.html file
-with open("index.html", "w") as file:
+# Save the HTML content to a file
+with open('index.html', 'w') as file:
     file.write(html_content)
 
 # Create a ZIP file containing the index.html
 import zipfile
 
-with zipfile.ZipFile("math_practice_app.zip", "w") as zipf:
-    zipf.write("index.html")
+with zipfile.ZipFile('math_practice_app.zip', 'w') as zipf:
+    zipf.write('index.html')
 
 print("The web app has been packaged into math_practice_app.zip for deployment on GitHub Pages.")
 

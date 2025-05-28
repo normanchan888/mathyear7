@@ -1,112 +1,104 @@
-
+# Create the index.html content for the Year 7 IB Math Algebra Quiz web app
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Year 7 IB Math Algebra Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #f0f8ff;
-    }
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      display: inline-block;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .question {
-      margin: 20px 0;
-    }
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-      margin: 10px;
-    }
-    .feedback {
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Year 7 IB Math Algebra Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f8ff;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Year 7 IB Math Algebra Quiz</h1>
-    <div class="question" id="question1">
-      <p>1. Simplify: 3x + 5x</p>
-      <input type="text" id="answer1" placeholder="Your answer">
-    </div>
-    <div class="question" id="question2">
-      <p>2. Solve for x: 2x + 3 = 11</p>
-      <input type="text" id="answer2" placeholder="Your answer">
-    </div>
-    <div class="question" id="question3">
-      <p>3. Expand: (x + 4)(x - 2)</p>
-      <input type="text" id="answer3" placeholder="Your answer">
-    </div>
-    <div class="question" id="question4">
-      <p>4. Factorize: x^2 - 9</p>
-      <input type="text" id="answer4" placeholder="Your answer">
-    </div>
-    <div class="question" id="question5">
-      <p>5. Simplify: 4y - 2y + 7</p>
-      <input type="text" id="answer5" placeholder="Your answer">
-    </div>
-    <div class="question" id="question6">
-      <p>6. Solve for y: 3y - 5 = 10</p>
-      <input type="text" id="answer6" placeholder="Your answer">
-    </div>
-    <div class="question" id="question7">
-      <p>7. Expand: 2(x + 3)</p>
-      <input type="text" id="answer7" placeholder="Your answer">
-    </div>
-    <div class="question" id="question8">
-      <p>8. Factorize: x^2 + 5x + 6</p>
-      <input type="text" id="answer8" placeholder="Your answer">
-    </div>
-    <div class="question" id="question9">
-      <p>9. Simplify: 7a - 3a + 2</p>
-      <input type="text" id="answer9" placeholder="Your answer">
-    </div>
-    <div class="question" id="question10">
-      <p>10. Solve for a: 4a + 6 = 18</p>
-      <input type="text" id="answer10" placeholder="Your answer">
-    </div>
-    <button onclick="checkAnswers()">Submit</button>
-    <p class="feedback" id="feedback"></p>
-  </div>
+  <div class="container">
+    <h1>Year 7 IB Math Algebra Quiz</h1>
+    <div id="quiz">
+      <p id="question">Question will appear here</p>
+      <input type="text" id="answer" placeholder="Your answer">
+      <button onclick="checkAnswer()">Submit</button>
+      <p class="feedback" id="feedback"></p>
+      <button onclick="nextQuestion()">Next Question</button>
+    </div>
+  </div>
 
-  <script>
-    function checkAnswers() {
-      const answers = [
-        document.getElementById('answer1').value,
-        document.getElementById('answer2').value,
-        document.getElementById('answer3').value,
-        document.getElementById('answer4').value,
-        document.getElementById('answer5').value,
-        document.getElementById('answer6').value,
-        document.getElementById('answer7').value,
-        document.getElementById('answer8').value,
-        document.getElementById('answer9').value,
-        document.getElementById('answer10').value
-      ];
+  <script>
+    const questions = [
+      { question: "Simplify: 3x + 5x", answer: "8x" },
+      { question: "Solve: 2x = 10", answer: "5" },
+      { question: "Expand: (x + 3)(x + 2)", answer: "x^2 + 5x + 6" },
+      { question: "Factorize: x^2 - 9", answer: "(x + 3)(x - 3)" },
+      { question: "Simplify: 4y - 2y + y", answer: "3y" },
+      { question: "Solve: x/3 = 4", answer: "12" },
+      { question: "Expand: 3(x + 4)", answer: "3x + 12" },
+      { question: "Factorize: x^2 + 6x + 9", answer: "(x + 3)^2" },
+      { question: "Simplify: 5a + 2a - 3a", answer: "4a" },
+      { question: "Solve: 3x - 1 = 8", answer: "3" }
+    ];
 
-      const correctAnswers = ['8x', '4', 'x^2 + 2x - 8', '(x + 3)(x - 3)', '2y + 7', '5', '2x + 6', '(x + 2)(x + 3)', '4a + 2', '3'];
+    let currentQuestionIndex = 0;
 
-      let feedback = '';
-      for (let i = 0; i < answers.length; i++) {
-        if (answers[i] === correctAnswers[i]) {
-          feedback += `Question ${i + 1}: ✅ Correct!<br>`;
-        } else {
-          feedback += `Question ${i + 1}: ❌ Incorrect. The correct answer is ${correctAnswers[i]}.<br>`;
-        }
-      }
+    function displayQuestion() {
+      const questionElement = document.getElementById('question');
+      questionElement.textContent = questions[currentQuestionIndex].question;
+      document.getElementById('answer').value = '';
+      document.getElementById('feedback').textContent = '';
+    }
 
-      document.getElementById('feedback').innerHTML = feedback;
-    }
-  </script>
+    function checkAnswer() {
+      const userAnswer = document.getElementById('answer').value.trim();
+      const correctAnswer = questions[currentQuestionIndex].answer;
+      const feedbackElement = document.getElementById('feedback');
+      if (userAnswer === correctAnswer) {
+        feedbackElement.textContent = '✅ Correct!';
+        feedbackElement.style.color = 'green';
+      } else {
+        feedbackElement.textContent = `❌ Incorrect! The correct answer is ${correctAnswer}.`;
+        feedbackElement.style.color = 'red';
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+      displayQuestion();
+    }
+
+    // Display the first question on load
+    displayQuestion();
+  </script>
 </body>
 </html>
+"""
+
+# Write the HTML content to index.html file
+with open("index.html", "w") as file:
+    file.write(html_content)
+
+# Create a ZIP file containing the index.html
+import zipfile
+
+with zipfile.ZipFile("math_practice_app.zip", "w") as zipf:
+    zipf.write("index.html")
+
+print("The web app has been packaged into math_practice_app.zip for deployment on GitHub Pages.")
+

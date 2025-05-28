@@ -1,115 +1,112 @@
-# Generate the HTML content for the Year 7 IB Math Algebra Quiz
-html_content = """
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Year 7 IB Math Algebra Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f0f8ff;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    .question {
-      margin: 20px 0;
-    }
-    .question p {
-      font-weight: bold;
-    }
-    .answer {
-      margin-top: 10px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 5px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Year 7 IB Math Algebra Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f8ff;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin: 20px 0;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Year 7 IB Math Algebra Quiz</h1>
-    <div class="question">
-      <p>1. Simplify: 3x + 5x</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>2. Solve for x: 2x + 3 = 11</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>3. Expand: (x + 4)(x - 2)</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>4. Factorize: x^2 - 9</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>5. Simplify: 4a - 2a + 7</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>6. Solve for y: 3y - 5 = 10</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>7. Expand: 2(x + 3)</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>8. Factorize: 2x^2 - 8x</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>9. Simplify: 5m + 3m - 2m</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-    <div class="question">
-      <p>10. Solve for z: 4z + 7 = 19</p>
-      <div class="answer">
-        <input type="text" placeholder="Your answer">
-      </div>
-    </div>
-  </div>
+  <div class="container">
+    <h1>Year 7 IB Math Algebra Quiz</h1>
+    <div class="question" id="question1">
+      <p>1. Simplify: 3x + 5x</p>
+      <input type="text" id="answer1" placeholder="Your answer">
+    </div>
+    <div class="question" id="question2">
+      <p>2. Solve for x: 2x + 3 = 11</p>
+      <input type="text" id="answer2" placeholder="Your answer">
+    </div>
+    <div class="question" id="question3">
+      <p>3. Expand: (x + 4)(x - 2)</p>
+      <input type="text" id="answer3" placeholder="Your answer">
+    </div>
+    <div class="question" id="question4">
+      <p>4. Factorize: x^2 - 9</p>
+      <input type="text" id="answer4" placeholder="Your answer">
+    </div>
+    <div class="question" id="question5">
+      <p>5. Simplify: 4y - 2y + 7</p>
+      <input type="text" id="answer5" placeholder="Your answer">
+    </div>
+    <div class="question" id="question6">
+      <p>6. Solve for y: 3y - 5 = 10</p>
+      <input type="text" id="answer6" placeholder="Your answer">
+    </div>
+    <div class="question" id="question7">
+      <p>7. Expand: 2(x + 3)</p>
+      <input type="text" id="answer7" placeholder="Your answer">
+    </div>
+    <div class="question" id="question8">
+      <p>8. Factorize: x^2 + 5x + 6</p>
+      <input type="text" id="answer8" placeholder="Your answer">
+    </div>
+    <div class="question" id="question9">
+      <p>9. Simplify: 7a - 3a + 2</p>
+      <input type="text" id="answer9" placeholder="Your answer">
+    </div>
+    <div class="question" id="question10">
+      <p>10. Solve for a: 4a + 6 = 18</p>
+      <input type="text" id="answer10" placeholder="Your answer">
+    </div>
+    <button onclick="checkAnswers()">Submit</button>
+    <p class="feedback" id="feedback"></p>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = [
+        document.getElementById('answer1').value,
+        document.getElementById('answer2').value,
+        document.getElementById('answer3').value,
+        document.getElementById('answer4').value,
+        document.getElementById('answer5').value,
+        document.getElementById('answer6').value,
+        document.getElementById('answer7').value,
+        document.getElementById('answer8').value,
+        document.getElementById('answer9').value,
+        document.getElementById('answer10').value
+      ];
+
+      const correctAnswers = ['8x', '4', 'x^2 + 2x - 8', '(x + 3)(x - 3)', '2y + 7', '5', '2x + 6', '(x + 2)(x + 3)', '4a + 2', '3'];
+
+      let feedback = '';
+      for (let i = 0; i < answers.length; i++) {
+        if (answers[i] === correctAnswers[i]) {
+          feedback += `Question ${i + 1}: ✅ Correct!<br>`;
+        } else {
+          feedback += `Question ${i + 1}: ❌ Incorrect. The correct answer is ${correctAnswers[i]}.<br>`;
+        }
+      }
+
+      document.getElementById('feedback').innerHTML = feedback;
+    }
+  </script>
 </body>
 </html>
-"""
-
-# Save the HTML content to a file
-with open('index.html', 'w') as f:
-    f.write(html_content)
-
-print("The index.html file for the Year 7 IB Math Algebra Quiz web app has been generated successfully.")
-

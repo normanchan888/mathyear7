@@ -1,10 +1,12 @@
-# Create the HTML content for the quiz web app
+import zipfile
+
+# HTML content for the updated quiz
 html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Year 7 IB Math Linear Algebra Quiz</title>
+  <title>Year 7 IB Math Algebra Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -32,97 +34,67 @@ html_content = """
 </head>
 <body>
   <div class="container">
-    <h1>Year 7 IB Math Linear Algebra Quiz</h1>
-    <div id="quiz">
-      <div class="question">
-        <p>1. Solve for x: 2x + 3 = 7</p>
-        <input type="number" id="q1" placeholder="Your answer">
-        <button onclick="checkAnswer(1, 2)">Submit</button>
-        <p class="feedback" id="feedback1"></p>
-      </div>
-      <div class="question">
-        <p>2. Solve for y: 3y - 4 = 11</p>
-        <input type="number" id="q2" placeholder="Your answer">
-        <button onclick="checkAnswer(2, 5)">Submit</button>
-        <p class="feedback" id="feedback2"></p>
-      </div>
-      <div class="question">
-        <p>3. Solve for x: 4x + 5 = 21</p>
-        <input type="number" id="q3" placeholder="Your answer">
-        <button onclick="checkAnswer(3, 4)">Submit</button>
-        <p class="feedback" id="feedback3"></p>
-      </div>
-      <div class="question">
-        <p>4. Solve for y: 5y - 6 = 19</p>
-        <input type="number" id="q4" placeholder="Your answer">
-        <button onclick="checkAnswer(4, 5)">Submit</button>
-        <p class="feedback" id="feedback4"></p>
-      </div>
-      <div class="question">
-        <p>5. Solve for x: 6x + 7 = 25</p>
-        <input type="number" id="q5" placeholder="Your answer">
-        <button onclick="checkAnswer(5, 3)">Submit</button>
-        <p class="feedback" id="feedback5"></p>
-      </div>
-      <div class="question">
-        <p>6. Solve for y: 7y - 8 = 34</p>
-        <input type="number" id="q6" placeholder="Your answer">
-        <button onclick="checkAnswer(6, 6)">Submit</button>
-        <p class="feedback" id="feedback6"></p>
-      </div>
-      <div class="question">
-        <p>7. Solve for x: 8x + 9 = 41</p>
-        <input type="number" id="q7" placeholder="Your answer">
-        <button onclick="checkAnswer(7, 4)">Submit</button>
-        <p class="feedback" id="feedback7"></p>
-      </div>
-      <div class="question">
-        <p>8. Solve for y: 9y - 10 = 62</p>
-        <input type="number" id="q8" placeholder="Your answer">
-        <button onclick="checkAnswer(8, 8)">Submit</button>
-        <p class="feedback" id="feedback8"></p>
-      </div>
-      <div class="question">
-        <p>9. Solve for x: 10x + 11 = 51</p>
-        <input type="number" id="q9" placeholder="Your answer">
-        <button onclick="checkAnswer(9, 4)">Submit</button>
-        <p class="feedback" id="feedback9"></p>
-      </div>
-      <div class="question">
-        <p>10. Solve for y: 11y - 12 = 89</p>
-        <input type="number" id="q10" placeholder="Your answer">
-        <button onclick="checkAnswer(10, 11)">Submit</button>
-        <p class="feedback" id="feedback10"></p>
-      </div>
-    </div>
+    <h1>Year 7 IB Math Algebra Quiz</h1>
+    <div id="quiz"></div>
+    <button onclick="checkAnswers()">Submit Answers</button>
+    <p class="feedback" id="feedback"></p>
   </div>
 
   <script>
-    function checkAnswer(questionNumber, correctAnswer) {
-      const userAnswer = parseInt(document.getElementById('q' + questionNumber).value);
-      const feedback = document.getElementById('feedback' + questionNumber);
-      if (userAnswer === correctAnswer) {
-        feedback.textContent = '✅ Correct!';
-        feedback.style.color = 'green';
-      } else {
-        feedback.textContent = `❌ Oops! The correct answer was ${correctAnswer}.`;
-        feedback.style.color = 'red';
-      }
+    const questions = [
+      { question: "Simplify: 3x + 2x", answer: "5x" },
+      { question: "Solve: x + 4 = 9", answer: "x=5" },
+      { question: "Expand: 3(x + 2)", answer: "3x+6" },
+      { question: "Factorize: 6x + 12", answer: "6(x+2)" },
+      { question: "Solve: 2x = 10", answer: "x=5" },
+      { question: "Simplify: 5y + 3y - y", answer: "7y" },
+      { question: "Expand: 2(a + 5)", answer: "2a+10" },
+      { question: "Factorize: 4y + 8", answer: "4(y+2)" },
+      { question: "Solve: x + 5 = 12", answer: "x=7" },
+      { question: "Simplify: 4a - a", answer: "3a" }
+    ];
+
+    function generateQuiz() {
+      const quizContainer = document.getElementById('quiz');
+      quizContainer.innerHTML = '';
+      questions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.innerHTML = `
+          <p>${index + 1}. ${q.question}</p>
+          <input type="text" id="answer${index}" placeholder="Your answer">
+        `;
+        quizContainer.appendChild(questionDiv);
+      });
     }
+
+    function checkAnswers() {
+      let correct = 0;
+      questions.forEach((q, index) => {
+        const userAnswer = document.getElementById(`answer${index}`).value.replace(/\s+/g, '').toLowerCase();
+        const correctAnswer = q.answer.replace(/\s+/g, '').toLowerCase();
+        if (userAnswer === correctAnswer) {
+          correct++;
+        }
+      });
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = `You got ${correct} out of ${questions.length} correct!`;
+      feedback.style.color = correct === questions.length ? 'green' : 'red';
+    }
+
+    // Generate the quiz on load
+    generateQuiz();
   </script>
 </body>
 </html>
 """
 
-# Save the HTML content to a file
-with open('index.html', 'w') as file:
-    file.write(html_content)
+# Write the HTML content to a file
+with open('index.html', 'w') as f:
+    f.write(html_content)
 
-# Create a ZIP file containing the index.html
-import zipfile
-
+# Create a ZIP file
 with zipfile.ZipFile('math_practice_app.zip', 'w') as zipf:
     zipf.write('index.html')
 
-print("The web app has been packaged into math_practice_app.zip for deployment on GitHub Pages.")
+print("The updated quiz web app has been packaged into math_practice_app.zip.")
 

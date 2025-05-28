@@ -1,69 +1,115 @@
+# Generate the HTML content for the Year 7 IB Math Algebra Quiz
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple Addition Practice</title>
+  <title>Year 7 IB Math Algebra Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
+      padding: 20px;
       background-color: #f0f8ff;
     }
     .container {
+      max-width: 800px;
+      margin: auto;
       background: white;
       padding: 30px;
       border-radius: 10px;
-      display: inline-block;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    input, button {
+    h1 {
+      text-align: center;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .answer {
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
       padding: 10px;
       font-size: 16px;
-      margin: 10px;
-    }
-    .feedback {
-      font-weight: bold;
-      margin-top: 20px;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Addition Practice</h1>
-    <p id="question">What is 0 + 0?</p>
-    <input type="number" id="answer" placeholder="Your answer">
-    <button onclick="checkAnswer()">Submit</button>
-    <p class="feedback" id="feedback"></p>
-    <button onclick="generateQuestion()">Next Question</button>
+    <h1>Year 7 IB Math Algebra Quiz</h1>
+    <div class="question">
+      <p>1. Simplify: 3x + 5x</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>2. Solve for x: 2x + 3 = 11</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>3. Expand: (x + 4)(x - 2)</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>4. Factorize: x^2 - 9</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>5. Simplify: 4a - 2a + 7</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>6. Solve for y: 3y - 5 = 10</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>7. Expand: 2(x + 3)</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>8. Factorize: 2x^2 - 8x</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>9. Simplify: 5m + 3m - 2m</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
+    <div class="question">
+      <p>10. Solve for z: 4z + 7 = 19</p>
+      <div class="answer">
+        <input type="text" placeholder="Your answer">
+      </div>
+    </div>
   </div>
-
-  <script>
-    let num1, num2;
-
-    function generateQuestion() {
-      num1 = Math.floor(Math.random() * 50);
-      num2 = Math.floor(Math.random() * 50);
-      document.getElementById('question').textContent = `What is ${num1} + ${num2}?`;
-      document.getElementById('answer').value = '';
-      document.getElementById('feedback').textContent = '';
-    }
-
-    function checkAnswer() {
-      const userAnswer = parseInt(document.getElementById('answer').value);
-      const correctAnswer = num1 + num2;
-      const feedback = document.getElementById('feedback');
-      if (userAnswer === correctAnswer) {
-        feedback.textContent = '✅ Correct!';
-        feedback.style.color = 'green';
-      } else {
-        feedback.textContent = `❌ Oops! The correct answer was ${correctAnswer}.`;
-        feedback.style.color = 'red';
-      }
-    }
-
-    // Generate the first question on load
-    generateQuestion();
-  </script>
 </body>
 </html>
+"""
+
+# Save the HTML content to a file
+with open('index.html', 'w') as f:
+    f.write(html_content)
+
+print("The index.html file for the Year 7 IB Math Algebra Quiz web app has been generated successfully.")
+
